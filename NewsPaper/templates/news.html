@@ -1,0 +1,41 @@
+<!-- наследование шаблона default -->
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %} <!-- не забываем заранее загружать наши фильтры! -->
+
+{% block title %} News {% endblock title %}
+
+{% block content %}
+
+<h1>Всего новостей: {{ news | length }} </h1> <!-- all news -->
+<hr>
+<h2 align="center">Специальные новости:</h2>
+{% if news %}
+    <table>
+        <tr>
+            <td><h4 style="margin-right:34px" align="center">Заголовок</h4></td>
+            <td><h4 style="margin-right:34px" align="center">Дата публикации</h4></td>
+            <td><h4 style="margin-right:14px" align="center">Первые 50 символов текста</h4></td>
+        </tr>
+        {% for post in object_list %}
+        <tr>
+                <td align="center">
+                    {{ post.title|censor:'*****' }}
+                </td>
+
+                <td align="center">
+                    {{ post.post_data|date:'d M Y H:i' }}
+                </td>
+                <td>
+                    {{ post.text|truncatewords:50|censor:'*****' }} <!-- вывод двадцати первых слов новостей -->
+                </td>
+            {% endfor %}
+            </tr>
+    </table>
+    <hr>
+    <!-- -->
+    <p align="center">Для перехода на саму статью отчет идет с 4 и далее, например, news/4 и т.д.</p>
+{% else %}
+    <h1>Новостей нет</h1>
+{% endif %}
+{% endblock content %}
