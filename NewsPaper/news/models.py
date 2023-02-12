@@ -33,7 +33,10 @@ class Author(models.Model):
         self.author_rating = pRat * 3 + cRat
         self.save()
 
-
+    # в админке отображается название автора, а не Author.objects
+    def __str__(self):
+        return self.authors_link_user.username.title()
+        
 # модель Category
 class Category(models.Model):
     # название категории новостей/статей их главная тематика
