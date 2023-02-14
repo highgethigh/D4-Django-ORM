@@ -4,6 +4,8 @@ from django.views.generic import ListView, DetailView
 # импортируем модель пост
 from .models import Post
 from datetime import datetime
+# импортируем класс "paginator"
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -15,7 +17,7 @@ class PostList(ListView):
     template_name = 'news.html'
     context_object_name = 'news'
     queryset = Post.objects.order_by('-id')  # новости выводятся от старой до самой новой
-
+    paginate_by = 10 # устанавливаем пагинацию на последние добавленные 10 новостей/статей
 # создаём представление, в котором будут детали конкретного отдельного товара
 class PostDetail(DetailView):
     model = Post # модель всё та же, но мы хотим получить детали конкретно отдельного поста

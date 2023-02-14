@@ -12,4 +12,4 @@ Then add <b>'django_filters'</b> to your <b>INSTALLED_APPS</b>.
     'django_filters',
 ]
 ```
-f
+Создаем файл <b>search.py</b> для фильтров
