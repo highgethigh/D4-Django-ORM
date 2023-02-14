@@ -63,7 +63,7 @@ class Post(models.Model):
                                     default=news)
 
     # автоматически добавляемая дата и время создания
-    post_data: DateTimeField = models.DateTimeField(auto_now_add=True)  # дата создания объекта
+    post_data = models.DateTimeField(auto_now_add=True)  # дата создания объекта
 
     # связь «многие ко многим» с моделью Category (с дополнительной моделью PostCategory через through)
     post_link_category = models.ManyToManyField(Category, through='PostCategory')
