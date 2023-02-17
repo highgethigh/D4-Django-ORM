@@ -7,34 +7,56 @@
 
 {% block content %}
 
-<h1>Всего новостей: {{ news | length }} </h1> <!-- all news -->
-<hr>
 <h2 align="center">Специальные новости:</h2>
 {% if news %}
-    <table>
+<table class="table">
+    <thead class="thead-dark" align="center">
+      <tr>
+        <th scope="col">Автор</th>
+        <th scope="col">Заголовок</th>
+        <th scope="col">Дата публикации</th>
+        <th scope="col">Первые 50 символов текста</th>
+      </tr>
+    </thead>
+    {% for post in object_list %}
+    <tbody align="center">
         <tr>
-            <td><h4 style="margin-right:4px" align="center">Заголовок</h4></td>
-            <td><h4 style="margin-right:34px" align="center">Дата публикации</h4></td>
-            <td><h4 style="margin-right:14px" align="center">Первые 50 символов текста</h4></td>
+            <th scope="row">{{ post.post_link_author}}</th>
+            <td><a href="{% url 'post' post.id %}">{{ post.title|censor:'*****' }}</a></td>
+            <td>{{ post.post_data|date:'Y-m-d H:i' }}</td>
+            <td>{{ post.text|truncatewords:50|censor:'*****'}}</td>
         </tr>
-        {% for post in object_list %}
-        <tr>
-                <td align="center">
-                    {{ post.title|censor:'*****' }}
-                </td>
+    </tbody>
+        {% endfor %}
+</table>
+    <!-- Проверяем что поддерживается постраничный вывод -->
+    {% if is_paginated %}
+    <div align="center">
+        Всего новостей на этой старанице: {{ news | length }}
+        <br>
+        страница {{ page_obj.number}} из {{ page_obj.paginator.num_pages }} страниц
+        <br>
+        {% if page_obj.has_previous %}
+            <a href="?page=1">First</a>
+            <a href="?page={{ page_obj.previous_page_number }}"><<<</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a>{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
 
-                <td align="center">
-                    {{ post.post_data|date:'d M Y H:i' }}
-                </td>
-                <td>
-                    {{ post.text|truncatewords:50|censor:'*****' }} <!-- вывод двадцати первых слов новостей -->
-                </td>
-            {% endfor %}
-            </tr>
-    </table>
-    <hr>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">>>></a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+    </div>
+    {% endif%}
+
     <!-- -->
-    <p align="center">Для перехода на саму статью отчет идет с 4 и далее, например, news/4 и т.д.</p>
+    <!--<p align="center">Для перехода на саму статью отчет идет с 4 и далее, например, news/4 и т.д.</p>-->
 {% else %}
     <h1>Новостей нет</h1>
 {% endif %}
