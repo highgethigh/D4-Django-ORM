@@ -14,3 +14,8 @@ class PostFilter(FilterSet):
 
             'text': ['icontains'],
         }
+
+        # либо fields = [ 'title', 'post_data', 'post_link_author', 'text']
+        # способ легче, без указаний значений ['icontains'], ['gt'], ['exact'], ['icontains'],
+
+        
