@@ -18,11 +18,23 @@ class PostList(ListView):
     context_object_name = 'news'
     queryset = Post.objects.order_by('-id')  # новости выводятся от старой до самой новой
     paginate_by = 10 # устанавливаем пагинацию на последние добавленные 10 новостей/статей
-# создаём представление, в котором будут детали конкретного отдельного товара
+
+
+# создаём представление, в котором будут детали конкретной отдельной новости/статьи
 class PostDetail(DetailView):
     model = Post # модель всё та же, но мы хотим получить детали конкретно отдельного поста
-    template_name = 'post.html'  # название шаблона будет news.html
+    template_name = 'post.html'  # название шаблона будет post.html
     context_object_name = 'post'  # название объекта
 
+
+from django.shortcuts import render
+from .search import PostFilter
+def search(request):
+    listings = Post.objects.all()
+    listing_filter = PostFilter(request.GET, queryset=listings)
+    context = {
+        'listing_filter': listing_filter,
+    }
+    return render(request, "search.html", context)
 
 
