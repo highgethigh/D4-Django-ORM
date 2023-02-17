@@ -24,7 +24,7 @@
     {% for listings in listing_filter.qs %} <!-- поменяем products на filter.qs, т.к. теперь мы забираем уже отобранную по каким-то параметрам информацию -->  
       <tr>
         <th scope="row">{{ listings.post_link_author}}</th>
-        <td>{{ listings.title|censor:'*****' }}</td>
+        <td><a href="/news/{{ listings.id }}">{{ listings.title|censor:'*****' }}</a></td>
         <td>{{ listings.post_data|date:'Y-m-d H:i' }}</td>
         <td>{{ listings.text|truncatewords:50|censor:'*****'}}</td>
       </tr>
