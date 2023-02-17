@@ -1,0 +1,35 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+<h5 align="center">Давайте найдем особенную новость из списка специальных новостей</h5>
+<!-- Перед таблицей добавим форму для поиска -->
+<form method="GET" align="center">
+   {{ listing_filter.form }} <!--Форму от фильтров за нас сделает Django. А вот кнопку, увы, придётся делать самому  -->
+   <input type="submit" value="Search">
+</form>
+<table class="table">
+    <thead class="thead-dark" align="center">
+      <tr>
+        <th scope="col">Автор</th>
+        <th scope="col">Заголовок</th>
+        <th scope="col">Дата публикации</th>
+        <th scope="col">Первые 50 символов текста</th>
+      </tr>
+    </thead>
+    <tbody  align="center">
+    {% for listings in listing_filter.qs %} <!-- поменяем products на filter.qs, т.к. теперь мы забираем уже отобранную по каким-то параметрам информацию -->  
+      <tr>
+        <th scope="row">{{ listings.post_link_author}}</th>
+        <td>{{ listings.title|censor:'*****' }}</td>
+        <td>{{ listings.post_data|date:'Y-m-d H:i' }}</td>
+        <td>{{ listings.text|truncatewords:50|censor:'*****'}}</td>
+      </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
+
