@@ -32,6 +32,22 @@ Then add <b>'django_filters'</b> to your <b>INSTALLED_APPS</b>.
             }
 ```
 
+Создаем новую вьюшку для фильтров в папке views.py:
+```
+    from django.shortcuts import render
+    from .search import PostFilter
+    def search(request):
+        listings = Post.objects.all()
+        listing_filter = PostFilter(request.GET, queryset=listings)
+        context = {
+            'listing_filter': listing_filter,
+        }
+        return render(request, "search.html", context)
+```
 
-
+В приложение news в урлах добавил страничку для news/search
+```
+    from . import views
+    path('search/', views.search, name='search'),
+```
 
