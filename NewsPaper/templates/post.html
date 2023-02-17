@@ -6,7 +6,7 @@
 
 {% block content %}
 <!-- added censor -->
-<h1 align="center">Новость<h3 align="center">{{ post.title|censor:'*****' }}</h3></h1>
+<h1 align="center">Новость от {{ post.post_link_author }}:<h4 align="center">{{ post.title|censor:'*****' }}</h4></h1>
 <h4 align="center">Дата добавления новости: {{ post.post_data|date:'d M Y H:i' }}</h4>
 <p align="center">{{ post.text|censor:'*****' }}</p>
 <a href="/news"><button style="margin:0 550px">Вернуться к списку новостей</button></a>
