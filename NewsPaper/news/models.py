@@ -42,6 +42,9 @@ class Category(models.Model):
     # название категории новостей/статей их главная тематика
     name_category = models.CharField(max_length=55, unique=True)
 
+    def __str__(self):
+        return self.name_category
+
 
 # модель Post
 class Post(models.Model):
@@ -93,7 +96,9 @@ class Post(models.Model):
         return self.text[0:123] + '...'
 
     def __str__(self):
-        return self.title # в админке отображается название заголовка, а не Post.objects
+        return f"{self.title}, дата добавления: {self.post_data}" # в админке отображается название заголовка, а не Post.objects
+    
+    
 # модель PostCategory
 class PostCategory(models.Model):
     # Промежуточная модель для связи «многие ко многим»:
