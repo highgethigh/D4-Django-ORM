@@ -98,6 +98,10 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.title}, дата добавления: {self.post_data}" # в админке отображается название заголовка, а не Post.objects
     
+
+    def get_absolute_url(self): # добавим абсолютный путь, чтобы после создания нас перебрасывало на страницу с этой новостью
+        return f'/news/{self.id}'
+    
     
 # модель PostCategory
 class PostCategory(models.Model):
