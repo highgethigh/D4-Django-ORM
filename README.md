@@ -170,7 +170,7 @@ class PostDeleteView(DeleteView):
     queryset = Post.objects.all()
     success_url = '/news/'
 ```
-Для отображения создаем для этого html-страниц: 
+Для отображения создаем для этого html-страницы: 
 1. <b>post_create.html</b>
 2. <b>post_delete.html</b>
 3. <b>post_edit.html</b>
