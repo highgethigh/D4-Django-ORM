@@ -10,4 +10,4 @@ class PostForm(ModelForm):
         model = Post  # это модель, по которой будет строиться форма
 
         # поля, которые будут выводиться на страничке
-        fields = ['title', 'post_link_author', 'post_link_category', 'text', 'check_box']
+        fields = ['title', 'post_link_author', 'post_link_category', 'categoryType', 'text', 'check_box']
