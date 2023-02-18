@@ -3,21 +3,20 @@
 {% load custom_filters %}
 
 {% block title %}Search{% endblock %}
-
 {% block content %}
-<h5 align="center">Давайте найдем особенную новость из списка специальных новостей</h5>
+<h5 align="center">Let's find the special news from the list of special news:</h5>
 <!-- Перед таблицей добавим форму для поиска -->
-<form method="GET" align="center">
+<form method="GET">
    {{ listing_filter.form }} <!--Форму от фильтров за нас сделает Django. А вот кнопку, увы, придётся делать самому  -->
    <input type="submit" value="Search">
 </form>
 <table class="table">
     <thead class="thead-dark" align="center">
       <tr>
-        <th scope="col">Автор</th>
-        <th scope="col">Заголовок</th>
-        <th scope="col">Дата публикации</th>
-        <th scope="col">Первые 50 символов текста</th>
+        <th scope="col">Author</th>
+        <th scope="col">Title</th>
+        <th scope="col">Publication Date</th>
+        <th scope="col">First 50 characters of text</th>
       </tr>
     </thead>
     <tbody  align="center">

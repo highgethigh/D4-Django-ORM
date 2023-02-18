@@ -1,0 +1,45 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %} <!-- не забываем заранее загружать наши фильтры! -->
+{% load widget_tweaks %}
+ 
+{% block title %} Add your news {% endblock title %}
+ 
+{% block content %}
+<style>
+    input {
+        width: 200px;
+    }
+</style>
+<h3 align="center"><i>Add your news</i></h3>
+<div class="i-am-centered">
+    <form method="POST" align="center">
+            {% csrf_token %}
+            <div class="form-group">
+                <label >Title</label>
+                {{ form.title }}
+            </div>
+            <div class="form-grou">
+                <label>Author</label>
+                {{ form.post_link_author }}
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                {{ form.post_link_category}}
+            </div>
+            <div class="form-group">
+                <label>CategoryType</label>
+                {{ form.categoryType }}
+            </div>
+            <div class="form-group">
+                <label>Text</label>
+                {{ form.text }}
+            </div>
+            <div class="form-group">
+                <label>Are you sure?</label>
+                {{ form.check_box }}
+            </div>
+            <button type="submit" class="btn btn-primary">Send news</button>
+    </form>
+</div>
+{% endblock content %}

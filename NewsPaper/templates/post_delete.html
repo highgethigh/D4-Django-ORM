@@ -1,0 +1,16 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %} <!-- не забываем заранее загружать наши фильтры! -->
+ 
+{% block title %} Product list {% endblock title %}
+ 
+{% block content %}
+<div align="center">
+    <h1>Delete post</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+      <p>Are you sure you want to delete:"{{ post.title }}"?</p>
+      <input type="submit" value="Confirm" />
+</form>
+</div>
+{% endblock content %} 

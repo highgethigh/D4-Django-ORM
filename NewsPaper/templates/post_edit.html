@@ -1,0 +1,13 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %} <!-- не забываем заранее загружать наши фильтры! -->
+ 
+{% block title %} Product list {% endblock title %}
+ 
+{% block content %}
+<h1 align="center">Edit post</h1>
+    <form action="" method="post" align="center">{% csrf_token %}
+      {{ form.as_p }}
+    <input type="submit" value="Update" />
+</form>
+{% endblock content %} 

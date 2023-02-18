@@ -18,7 +18,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link rel="stylesheet" href="{% static 'bootstrap/css/styles.css' %}">
     </head>
-    <body>
+    <body style="background: rgba(189, 188, 188, 0.522)">
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
@@ -28,7 +28,8 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/default">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="/news">News</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/news/search/">Search</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/news/search">Search</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/news/add">Add your news</a></li>
                     </ul>
                 </div>
             </div>
@@ -37,10 +38,9 @@
         <main class="page-content">
             <div class="container">
                     {% block content %}
-                    {{ flatpage.content }}
-                    <form method="post">
-                        <input type="text" name="fvsd" id="">
-                    </form>
+                    <div align="center">
+                        {{ flatpage.content }}
+                    </div>
                     {% endblock content %}
             </div>
         </main>

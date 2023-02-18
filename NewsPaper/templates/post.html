@@ -6,8 +6,16 @@
 
 {% block content %}
 <!-- added censor -->
-<h1 align="center">Новость от {{ post.post_link_author }}:<h4 align="center">{{ post.title|censor:'*****' }}</h4></h1>
-<h4 align="center">Дата добавления новости: {{ post.post_data|date:'d M Y H:i' }}</h4>
+<h1 align="center">News from {{ post.post_link_author }}:<h4 align="center">{{ post.title|censor:'*****' }}</h4></h1>
 <p align="center">{{ post.text|censor:'*****' }}</p>
-<a href="/news"><button style="margin:0 550px">Вернуться к списку новостей</button></a>
+<h4 align="center">Date the news was added: {{ post.post_data|date:'d M Y H:i' }}</h4>
+<div align="center">
+    <button><a href="{% url 'post_edit' post.pk %}">✒ Edit News</a></p></button>
+    <button><a href="{% url 'post_delete' post.pk %}">🗑 Delete News</a></p></button>
+
+    <br>
+    <br>
+    <a href="/news"><button style="margin:0 550px">Back to news list</button></a>
+</div>
+
 {% endblock content %}
